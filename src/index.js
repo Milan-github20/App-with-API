@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import MyComponent from "./API";
+import MyComponent from "./gradovi";
 import Main from "./Main";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
