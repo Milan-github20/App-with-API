@@ -2,12 +2,8 @@
 
 body {
   margin: 0;
-  background: linear-gradient(
-    0deg,
-    rgba(55, 61, 65, 1) 2%,
-    rgba(86, 97, 103, 1) 44%,
-    rgba(174, 184, 190, 1) 100%
-  );
+
+  background-color: rgba(86, 97, 103, 1);
   height: 86.8vh;
   font-family: "Libre Baskerville", serif;
 }
@@ -18,45 +14,21 @@ body {
   margin-top: 8rem;
 }
 
-.input--ime_pacijenta {
+.input--pretrazi_pacijenta {
   margin: 10px;
-  height: 30px;
+  height: 45px;
   border-radius: 10px;
   border: none;
   outline: none;
-  text-align: center;
-  width: 12rem;
+  text-align: left;
+  width: 50rem;
   font-family: "Libre Baskerville", serif;
-  font-size: 14px;
-}
-
-.input--prezime_pacijenta {
-  margin: 10px;
-  height: 30px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  text-align: center;
-  width: 12rem;
-  font-family: "Libre Baskerville", serif;
-  font-size: 14px;
-}
-
-.input--jmbg_pacijenta {
-  margin: 10px;
-  height: 30px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  text-align: center;
-  width: 12rem;
-  font-family: "Libre Baskerville", serif;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .button--listing_pacijenata {
   margin: 10px;
-  height: 31px;
+  height: 46px;
   width: 100px;
   border-radius: 10px;
   border: none;
@@ -71,7 +43,7 @@ body {
 
 .button--dodaj_pacijenta {
   margin: 10px;
-  height: 31px;
+  height: 46px;
   width: 170px;
   border-radius: 10px;
   border: none;
