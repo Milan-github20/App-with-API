@@ -2,11 +2,13 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Pacijenti from "./Pacijenti/pacijenti";
+import PopupGradovi from "./Popup grad/Popup_grad";
 import Popup from "./Popup/Popup-modal";
 import "./style.css";
 
 const Main = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [openModalGrad, setOpenModalGrad] = useState(false);
   const [value, setValue] = useState("");
   const [ucitavanje, setUcitavanje] = useState(false);
   const [pacijenti, setPacijenti] = useState([]);
@@ -33,29 +35,38 @@ const Main = () => {
 
   const handleSearchIme = async (e) => {
     e.preventDefault();
-    return await axios
-      .get(
-        `http://81.93.66.18:8234/api3.cfc?method=pacijent_trazi&ime=${value}`
-      )
-      .then((response) => {
-        setValue("");
 
-        const transformedData = response.data.lista_pacijenata.DATA.map(
-          (item) => {
-            const helper = items.findIndex((grad) => grad.id_grad === item[4]);
-            return {
-              id: item[0],
-              prezime: item[1],
-              ime: item[2],
-              jmbg: item[3],
-              grad: items[helper].naziv,
-            };
-          }
-        );
-        setPacijenti(transformedData);
-        setUcitavanje(true);
-      })
-      .catch((err) => console.log(err));
+    if (value.trim().length === 1 || value.trim().length === 2) {
+      return alert("Unesi 3 ili vise karaktera");
+    } else if (value.trim() === "" || value.trim() === null) {
+      return alert("Polje ne smije biti prazno");
+    } else {
+      return await axios
+        .get(
+          `http://81.93.66.18:8234/api3.cfc?method=pacijent_trazi&ime=${value.trim()}`
+        )
+        .then((response) => {
+          setValue("");
+
+          const transformedData = response.data.lista_pacijenata.DATA.map(
+            (item) => {
+              const helper = items.findIndex(
+                (grad) => grad.id_grad === item[4]
+              );
+              return {
+                id: item[0],
+                prezime: item[1],
+                ime: item[2],
+                jmbg: item[3],
+                grad: items[helper].naziv,
+              };
+            }
+          );
+          setPacijenti(transformedData);
+          setUcitavanje(true);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const handleSearchJmbg = async (e) => {
@@ -105,9 +116,20 @@ const Main = () => {
         >
           Dodaj pacijenta
         </button>
+        <button
+          className="button--dodaj_grad_main"
+          onClick={() => {
+            setOpenModalGrad(true);
+          }}
+        >
+          Dodaj Grad
+        </button>
       </div>
       <div className="div--popup">
-        {openModal && <Popup closeModal={setOpenModal} />}
+        {openModal && <Popup gradovi={items} closeModal={setOpenModal} />}
+      </div>
+      <div className="div--popup">
+        {openModalGrad && <PopupGradovi closeModalGrad={setOpenModalGrad} />}
       </div>
       {ucitavanje && <Pacijenti pacijenti={pacijenti} />}
     </div>

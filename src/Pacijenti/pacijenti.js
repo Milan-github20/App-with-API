@@ -11,6 +11,8 @@ function Pacijenti(props) {
           <th>IME</th>
           <th>PREZIME</th>
           <th>GRAD</th>
+          <th></th>
+          <th></th>
         </tr>
         <hr className="hr--horizontalna_linija"></hr>
         {props.pacijenti.map((item) => (
@@ -25,6 +27,12 @@ function Pacijenti(props) {
                 item.prezime.slice(1).toLowerCase()}
             </th>
             <th>{item.grad}</th>
+            <th>
+              <button className="th--button_1">Izmjeni</button>
+            </th>
+            <th>
+              <button className="th--button_2">Obrisi</button>
+            </th>
           </tr>
         ))}
       </tbody>

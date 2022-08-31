@@ -2,9 +2,7 @@
 
 body {
   margin: 0;
-
-  background-color: rgba(86, 97, 103, 1);
-  height: 86.8vh;
+  background-color: rgba(178, 201, 215, 1);
   font-family: "Libre Baskerville", serif;
 }
 
@@ -35,6 +33,7 @@ body {
   font-family: "Libre Baskerville", serif;
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .button--listing_pacijenata:hover {
@@ -50,6 +49,7 @@ body {
   font-family: "Libre Baskerville", serif;
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .button--dodaj_pacijenta:hover {
@@ -59,4 +59,20 @@ body {
 .div--popup {
   display: flex;
   justify-content: center;
+}
+
+.button--dodaj_grad_main {
+  margin: 10px;
+  height: 46px;
+  width: 120px;
+  border-radius: 10px;
+  border: none;
+  font-family: "Libre Baskerville", serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button--dodaj_grad_main:hover {
+  background-color: rgba(156, 166, 172, 1);
 }

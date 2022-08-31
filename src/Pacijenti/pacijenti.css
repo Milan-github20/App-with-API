@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
+
 .tabela--tabela_pacijenti {
   display: flex;
   flex-direction: column;
@@ -28,4 +30,36 @@
 
 .tr--main_dio_tabele th {
   width: 10%;
+}
+
+.th--button_1 {
+  background-color: #ffd700;
+  border: 0;
+  border-radius: 5px;
+  font-family: "Libre Baskerville", serif;
+  height: 25px;
+  width: 90px;
+  margin: 3px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.th--button_1:hover {
+  background-color: #daa520;
+}
+
+.th--button_2 {
+  background-color: #f44336;
+  border: 0;
+  border-radius: 5px;
+  font-family: "Libre Baskerville", serif;
+  height: 25px;
+  font-weight: 700;
+  width: 90px;
+  margin: 3px;
+  cursor: pointer;
+}
+
+.th--button_2:hover {
+  background-color: #dc3545;
 }

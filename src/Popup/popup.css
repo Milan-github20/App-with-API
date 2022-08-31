@@ -3,20 +3,24 @@
 .div--backgorund_popup {
   width: 23vw;
   background-color: rgba(218, 219, 220, 1);
-  margin-top: 6rem;
-  height: 24rem;
+  margin-top: 4rem;
+  height: 26rem;
   display: flex;
   justify-content: center;
   border-radius: 30px;
   flex-direction: column;
-  position: fixed;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
 }
 
 .div--popup_modal {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 19rem;
+  height: 22rem;
   align-items: center;
 }
 
@@ -25,7 +29,7 @@
 }
 
 .div--closeModal {
-  max-width: 25rem;
+  max-width: 23rem;
   display: flex;
   justify-content: right;
 }
@@ -75,9 +79,54 @@
   font-weight: 700;
 }
 
+.input--izaberi_grad {
+  margin: 10px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  text-align: center;
+  width: 20rem;
+  font-family: "Libre Baskerville", serif;
+  font-size: 16px;
+  font-weight: 700;
+}
+
 .div--buttons {
   display: flex;
   margin-top: 10px;
+}
+
+.button--dodaj {
+  margin: 10px;
+  height: 31px;
+  width: 120px;
+  border-radius: 10px;
+  border: none;
+  font-family: "Libre Baskerville", serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button--dodaj:hover {
+  background-color: rgba(156, 166, 172, 1);
+}
+
+.button--otkazi {
+  margin: 10px;
+  height: 31px;
+  width: 120px;
+  border-radius: 10px;
+  border: none;
+  font-family: "Libre Baskerville", serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button--otkazi:hover {
+  background-color: rgba(156, 166, 172, 1);
 }
 
 .button--dodaj {
@@ -95,17 +144,12 @@
   background-color: rgba(156, 166, 172, 1);
 }
 
-.button--otkazi {
-  margin: 10px;
-  height: 31px;
-  width: 120px;
-  border-radius: 10px;
-  border: none;
-  font-family: "Libre Baskerville", serif;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.button--otkazi:hover {
-  background-color: rgba(156, 166, 172, 1);
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
 }
