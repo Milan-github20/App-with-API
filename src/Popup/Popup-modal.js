@@ -17,6 +17,7 @@ const Modal = (props) => {
     firstName: "",
     lastName: "",
     jmbg: "",
+    grad: "",
   });
 
   function submit(e) {
@@ -53,17 +54,22 @@ const Modal = (props) => {
     ) {
       return alert("Unesite tacno 13 cifara");
     } else {
-      const url = `http://81.93.66.18:8234/api3.cfc?method=pacijent_unos&ime=${imeRef.current.value}&prezime=${prezimeRef.current.value}&jmbg=${jmbgRef.current.value}&id_grad=2`;
+      const url = `http://172.18.1.73:8080/api3.cfc?method=pacijent_unos&ime=${
+        imeRef.current.value
+      }&prezime=${prezimeRef.current.value}&jmbg=${
+        jmbgRef.current.value
+      }&id_grad=${+data.grad}`;
 
       axios
         .post(url, {
           firstName: imeRef.current.value,
           lastName: prezimeRef.current.value,
           jmbg: jmbgRef.current.value,
+          grad: +data.grad,
         })
         .then((res) => {
           console.log(res.data);
-          alert("Unijeli ste pacijenta");
+          alert("Uspjesno ste unijeli pacijenta!");
           imeRef.current.value = "";
           prezimeRef.current.value = "";
           jmbgRef.current.value = "";
@@ -73,7 +79,8 @@ const Modal = (props) => {
   }
 
   function handle(e) {
-    const newdata = { ...data };
+    const index = e.target.children[e.target.selectedIndex].dataset.id;
+    const newdata = { ...data, grad: index };
     newdata[e.target.id] = e.target.value;
     setData(newdata);
   }
@@ -91,29 +98,30 @@ const Modal = (props) => {
           <input
             placeholder="Ime pacijenta"
             className="input--ime_pacijenta_dodaj"
-            onChange={(e) => handle(e)}
             ref={imeRef}
             type="text"
           ></input>
           <input
             placeholder="Prezime pacijenta"
             className="input--prezime_pacijenta_dodaj"
-            onChange={(e) => handle(e)}
             ref={prezimeRef}
             type="text"
           ></input>
           <input
             placeholder="JMBG pacijenta"
             className="input--jmbg_dodaj"
-            onChange={(e) => handle(e)}
             ref={jmbgRef}
             type="number"
           ></input>
-          {/* <select placeholder="Izaberi grad" className="input--izaberi_grad">
-            {props.items.map((item) => {
-              return <option key={item.id}>{item.naziv}</option>;
+          <select onChange={handle} className="select--select_button">
+            {props.gradovi.map((grad) => {
+              return (
+                <option data-id={grad.id_grad} key={grad.id_grad}>
+                  {grad.naziv}
+                </option>
+              );
             })}
-          </select> */}
+          </select>
           <div className="div--buttons">
             <button className="button--dodaj" value="Dodaj">
               Dodaj
@@ -132,7 +140,7 @@ const Modal = (props) => {
   );
 };
 
-const Popup = ({ closeModal }) => {
+const Popup = (props) => {
   return (
     <>
       {ReactDOM.createPortal(
@@ -140,7 +148,7 @@ const Popup = ({ closeModal }) => {
         document.getElementById("modal")
       )}
       {ReactDOM.createPortal(
-        <Modal onClose={closeModal}></Modal>,
+        <Modal gradovi={props.gradovi} onClose={props.closeModal}></Modal>,
         document.getElementById("modal")
       )}
     </>

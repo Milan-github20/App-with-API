@@ -45,7 +45,7 @@
   text-align: center;
   width: 20rem;
   font-family: "Libre Baskerville", serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -63,6 +63,7 @@
   font-family: "Libre Baskerville", serif;
   font-size: 14px;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .button--dodaj_grad:hover {
@@ -78,6 +79,7 @@
   font-family: "Libre Baskerville", serif;
   font-size: 14px;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .button--otkazi_grad:hover {

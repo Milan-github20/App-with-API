@@ -28,7 +28,7 @@ const Modal = (props) => {
     ) {
       return alert("Unesite 3 ili vise karaktera");
     } else {
-      const urlGrad = `http://81.93.66.18:8234/api3.cfc?method=gradovi_unos&naziv=${gradRef.current.value}`;
+      const urlGrad = `http://172.18.1.73:8080/api3.cfc?method=gradovi_unos&naziv=${gradRef.current.value}`;
       axios
         .post(urlGrad, {
           grad: gradRef.current.value,

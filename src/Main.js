@@ -16,7 +16,7 @@ const Main = () => {
 
   const fetchGradovi = async () => {
     const response = await fetch(
-      "http://81.93.66.18:8234/api3.cfc?method=gradovi_lista"
+      "http://172.18.1.73:8080/api3.cfc?method=gradovi_lista"
     );
     const data = await response.json();
 
@@ -43,7 +43,7 @@ const Main = () => {
     } else {
       return await axios
         .get(
-          `http://81.93.66.18:8234/api3.cfc?method=pacijent_trazi&ime=${value.trim()}`
+          `http://172.18.1.73:8080/api3.cfc?method=pacijent_trazi&ime=${value.trim()}`
         )
         .then((response) => {
           setValue("");
@@ -69,32 +69,32 @@ const Main = () => {
     }
   };
 
-  const handleSearchJmbg = async (e) => {
-    e.preventDefault();
-    return await axios
-      .get(
-        `http://81.93.66.18:8234/api3.cfc?method=pacijent_trazi&jmbg=${value}`
-      )
-      .then((response) => {
-        setValue("");
+  //   const handleSearchJmbg = async (e) => {
+  //     e.preventDefault();
+  //     return await axios
+  //       .get(
+  //         `http://172.18.1.73:8080/api3.cfc?method=pacijent_trazi&jmbg=${value}`
+  //       )
+  //       .then((response) => {
+  //         setValue("");
 
-        const transformedData = response.data.lista_pacijenata.DATA.map(
-          (item) => {
-            const helper = items.findIndex((grad) => grad.id_grad === item[4]);
-            return {
-              id: item[0],
-              prezime: item[1],
-              ime: item[2],
-              jmbg: item[3],
-              grad: items[helper].naziv,
-            };
-          }
-        );
-        setPacijenti(transformedData);
-        setUcitavanje(true);
-      })
-      .catch((err) => console.log(err));
-  };
+  //         const transformedData = response.data.lista_pacijenata.DATA.map(
+  //           (item) => {
+  //             const helper = items.findIndex((grad) => grad.id_grad === item[4]);
+  //             return {
+  //               id: item[0],
+  //               prezime: item[1],
+  //               ime: item[2],
+  //               jmbg: item[3],
+  //               grad: items[helper].naziv,
+  //             };
+  //           }
+  //         );
+  //         setPacijenti(transformedData);
+  //         setUcitavanje(true);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   };
 
   return (
     <div>

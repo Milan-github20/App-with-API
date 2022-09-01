@@ -28,8 +28,15 @@
   justify-content: space-evenly;
 }
 
+.tr--main_dio_tabele:hover {
+  background-color: #4f9aa9;
+}
+
 .tr--main_dio_tabele th {
   width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .th--button_1 {
@@ -61,5 +68,5 @@
 }
 
 .th--button_2:hover {
-  background-color: #dc3545;
+  background-color: #9f3c3c;
 }
