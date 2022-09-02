@@ -13,12 +13,12 @@
 }
 
 .tr--header_tr th {
-  width: 10%;
+  width: 8%;
 }
 
 .hr--horizontalna_linija {
   border: 1px solid black;
-  max-width: 95rem;
+  max-width: 110rem;
   width: 100%;
   margin-top: 15px;
 }
@@ -33,7 +33,7 @@
 }
 
 .tr--main_dio_tabele th {
-  width: 10%;
+  width: 8%;
   display: flex;
   justify-content: center;
   align-items: center;

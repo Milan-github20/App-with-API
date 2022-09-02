@@ -33,77 +33,78 @@ const Main = () => {
     fetchGradovi();
   }, []);
 
-  const handleSearchIme = async (e) => {
+  const searchSum = (e) => {
     e.preventDefault();
-
-    if (value.trim().length === 1 || value.trim().length === 2) {
-      return alert("Unesi 3 ili vise karaktera");
-    } else if (value.trim() === "" || value.trim() === null) {
+    if (value.trim() === "" || value.trim() === null) {
       return alert("Polje ne smije biti prazno");
+    }
+    if (isNaN(value.trim())) {
+      if (value.trim().length === 1 || value.trim().length === 2) {
+        return alert("Unesi 3 ili vise karaktera");
+      } else {
+        return axios
+          .get(
+            `http://172.18.1.73:8080/api3.cfc?method=pacijent_trazi&ime=${value.trim()}`
+          )
+          .then((response) => {
+            const transformedData = response.data.lista_pacijenata.DATA.map(
+              (item) => {
+                let helper = items.findIndex(
+                  (grad) => grad.id_grad === item[4]
+                );
+                return {
+                  id: item[0],
+                  prezime: item[1],
+                  ime: item[2],
+                  jmbg: item[3],
+                  grad: helper !== -1 ? items[helper].naziv : "",
+                };
+              }
+            );
+            setPacijenti(transformedData);
+            setUcitavanje(true);
+          })
+          .catch((err) => console.log(err));
+      }
     } else {
-      return await axios
+      if (value.trim() === "" || value.trim() === null) {
+        return alert("Polje ne smije biti prazno");
+      } else if (value.trim().length === 1 || value.trim().length === 2) {
+        return alert("Unesi 3 ili vise karaktera");
+      }
+
+      return axios
         .get(
-          `http://172.18.1.73:8080/api3.cfc?method=pacijent_trazi&ime=${value.trim()}`
+          `http://172.18.1.73:8080/api3.cfc?method=pacijent_trazi&jmbg=${value.trim()}`
         )
         .then((response) => {
-          setValue("");
-
           const transformedData = response.data.lista_pacijenata.DATA.map(
             (item) => {
-              const helper = items.findIndex(
-                (grad) => grad.id_grad === item[4]
-              );
+              let helper = items.findIndex((grad) => grad.id_grad === item[4]);
               return {
                 id: item[0],
                 prezime: item[1],
                 ime: item[2],
                 jmbg: item[3],
-                grad: items[helper].naziv,
+                grad: helper !== -1 ? items[helper].naziv : "",
               };
             }
           );
           setPacijenti(transformedData);
+
           setUcitavanje(true);
         })
         .catch((err) => console.log(err));
     }
   };
 
-  //   const handleSearchJmbg = async (e) => {
-  //     e.preventDefault();
-  //     return await axios
-  //       .get(
-  //         `http://172.18.1.73:8080/api3.cfc?method=pacijent_trazi&jmbg=${value}`
-  //       )
-  //       .then((response) => {
-  //         setValue("");
-
-  //         const transformedData = response.data.lista_pacijenata.DATA.map(
-  //           (item) => {
-  //             const helper = items.findIndex((grad) => grad.id_grad === item[4]);
-  //             return {
-  //               id: item[0],
-  //               prezime: item[1],
-  //               ime: item[2],
-  //               jmbg: item[3],
-  //               grad: items[helper].naziv,
-  //             };
-  //           }
-  //         );
-  //         setPacijenti(transformedData);
-  //         setUcitavanje(true);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   };
-
   return (
     <div>
       <div className="div--pocetni_input">
-        <form onSubmit={handleSearchIme}>
+        <form onSubmit={searchSum}>
           <input
             placeholder="Pretrazi pacijenta..."
             className="input--pretrazi_pacijenta"
-            value={value}
             onChange={(e) => setValue(e.target.value)}
           ></input>
           <button className="button--listing_pacijenata">Trazi</button>

@@ -7,6 +7,7 @@ import PopupEdit from "../Edit/Edit";
 function Pacijenti(props) {
   const [edit, setEdit] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [uredi, setUredi] = useState(false);
 
   const editPacijenta = (id, ime, prezime, jmbg, grad) => {
     const data = {
@@ -17,14 +18,13 @@ function Pacijenti(props) {
       grad: grad,
     };
 
-    console.log(data);
-
     setEdit(data);
     setIsEditing(true);
   };
 
   function deleteItem(id, e) {
     e.preventDefault();
+    e.target.parentElement.parentElement.remove();
     console.log(id);
     axios
       .post(`http://172.18.1.73:8080/api3.cfc?method=pacijent_obrisi&id=${id}`)
@@ -62,15 +62,16 @@ function Pacijenti(props) {
               <th>
                 <button
                   className="th--button_1"
-                  onClick={() =>
+                  onClick={() => {
                     editPacijenta(
                       item.id,
                       item.ime,
                       item.prezime,
                       item.jmbg,
                       item.grad
-                    )
-                  }
+                    );
+                    setUredi(true);
+                  }}
                 >
                   Uredi
                 </button>
@@ -86,7 +87,7 @@ function Pacijenti(props) {
             </tr>
           ))}
         </tbody>
-        {isEditing && <PopupEdit podaci={edit} />}
+        {uredi && isEditing && <PopupEdit podaci={edit} uredi={setUredi} />}
       </table>
     </>
   );

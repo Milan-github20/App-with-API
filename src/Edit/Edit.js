@@ -1,54 +1,159 @@
-import React from "react";
+import { useRef, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+import axios from "axios";
 
 const Backdrop = () => {
   return <div className="backdrop"></div>;
 };
 
 const Edit = (props) => {
+  const imeRef = useRef();
+  const prezimeRef = useRef();
+  const jmbgRef = useRef();
+
+  const [data, setData] = useState({
+    grad: "",
+  });
+
+  const [items, setItems] = useState([]);
+
+  const fetchGradovi = async () => {
+    const response = await fetch(
+      "http://172.18.1.73:8080/api3.cfc?method=gradovi_lista"
+    );
+    const data = await response.json();
+
+    const transformedData = data.gradovi.DATA.map((item) => {
+      return {
+        id_grad: item[0],
+        naziv: item[1],
+      };
+    });
+    setItems(transformedData);
+  };
+
+  useEffect(() => {
+    fetchGradovi();
+  }, []);
+
+  function submit(e) {
+    e.preventDefault();
+    if (
+      imeRef.current.value.trim() === "" ||
+      imeRef.current.value.trim() === null
+    ) {
+      return alert("Morate unijeti ime pacijenta! ");
+    }
+    if (imeRef.current.value.trim().length <= 2) {
+      return alert("Morate unijeti više od dva karaktera!");
+    }
+    if (
+      prezimeRef.current.value.trim() === "" ||
+      prezimeRef.current.value.trim() === null
+    ) {
+      return alert("Morate unijeti prezime pacijenta!");
+    }
+    if (prezimeRef.current.value.trim().length <= 2) {
+      return alert("Morate unijeti više od dva karaktera!");
+    }
+    if (
+      jmbgRef.current.value.trim() === "" ||
+      jmbgRef.current.value.trim() === null
+    ) {
+      return alert("Morate unijeti matični broj pacijenta!");
+    }
+    if (
+      jmbgRef.current.value.trim().length <= 12 ||
+      jmbgRef.current.value.trim().length >= 14
+    ) {
+      return alert("Morate unijeti tačno 13 karaktera!");
+    }
+
+    console.log(imeRef.current.value);
+    console.log(prezimeRef.current.value);
+    console.log(jmbgRef.current.value);
+    const url = `http://172.18.1.73:8080/api3.cfc?method=pacijent_unos&ime=${
+      imeRef.current.value
+    }&prezime=${prezimeRef.current.value}&jmbg=${
+      jmbgRef.current.value
+    }&id_grad=${+data.grad}&id=${props.nestoDrugo.id}`;
+
+    axios
+      .post(url, {
+        ime: imeRef.current.value,
+        prezime: prezimeRef.current.value,
+        jmbg: jmbgRef.current.value,
+        id_grad: +data.grad,
+      })
+      .then((res) => {
+        alert("Uspješno ste napravili izmjene!");
+        props.onClose(false);
+      });
+  }
+
+  console.log(data.grad);
+
+  function handle(e) {
+    const index = e.target.children[e.target.selectedIndex].dataset.id;
+    const newdata = { grad: index };
+    console.log(newdata);
+    setData(newdata);
+  }
   return (
     <div className="div--backgorund_popup">
-      <form>
+      <form onSubmit={(e) => submit(e)}>
         <div className="div--closeModal">
-          <span className="span--x">X</span>
+          <span className="span--x" onClick={() => props.onClose(false)}>
+            ✖
+          </span>
         </div>
         <div className="div--popup_modal">
-          <h2>Uredi pacijenta</h2>
+          <h2>Dodaj pacijenta</h2>
+          <div className="name">
+            <input
+              className="input--ime_pacijenta_dodaj"
+              type="text"
+              id="firstName"
+              ref={imeRef}
+              defaultValue={
+                props.nestoDrugo.ime.charAt(0).toUpperCase() +
+                props.nestoDrugo.ime.slice(1).toLowerCase()
+              }
+            />
+          </div>
+
           <input
-            placeholder="Ime pacijenta"
-            className="input--ime_pacijenta_dodaj"
             type="text"
-            defaultValue={props.nestoDrugo.ime}
-          ></input>
-          <input
-            placeholder="Prezime pacijenta"
+            id="lastName"
             className="input--prezime_pacijenta_dodaj"
-            type="text"
-            defaultValue={props.nestoDrugo.prezime}
-          ></input>
+            ref={prezimeRef}
+            defaultValue={
+              props.nestoDrugo.prezime.charAt(0).toUpperCase() +
+              props.nestoDrugo.prezime.slice(1).toLowerCase()
+            }
+          />
+
           <input
-            placeholder="JMBG pacijenta"
-            className="input--jmbg_dodaj"
             type="number"
+            className="input--jmbg_dodaj"
+            id="jmbg"
+            ref={jmbgRef}
             defaultValue={props.nestoDrugo.jmbg}
-          ></input>
-          {/* <select className="select--select_button">
-            {props.gradovi.map((grad) => {
-              return (
-                <option data-id={grad.id_grad} key={grad.id_grad}>
-                  {grad.naziv}
-                </option>
-              );
-            })}
-          </select> */}
-          <input defaultValue={props.nestoDrugo.grad}></input>
+          />
 
+          <select className="select--select_button" onChange={handle}>
+            {items.map((item) => (
+              <option data-id={item.id_grad}>{item.naziv}</option>
+            ))}
+          </select>
           <div className="div--buttons">
-            <button className="button--dodaj" value="Dodaj">
-              Dodaj
-            </button>
-
-            <button className="button--otkazi_edit">Otkazi</button>
+            <input type="submit" className="button--dodaj" value="Uredi" />
+            <input
+              type="button"
+              className="button--otkazi"
+              onClick={() => props.onClose(false)}
+              value="Otkaži"
+            />
           </div>
         </div>
       </form>
@@ -64,7 +169,7 @@ const PopupEdit = (props) => {
         document.getElementById("modal")
       )}
       {ReactDOM.createPortal(
-        <Edit nestoDrugo={props.podaci}></Edit>,
+        <Edit nestoDrugo={props.podaci} onClose={props.uredi}></Edit>,
         document.getElementById("modal")
       )}
     </>
