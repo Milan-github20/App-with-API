@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
+
+.div--backgorund_popup_uredi {
+  width: 23vw;
+  background-color: rgba(218, 219, 220, 1);
+  margin-top: 4rem;
+  height: 26rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 30px;
+  flex-direction: column;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.div--popup_modal_uredi {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 22rem;
+  align-items: center;
+}
+
+.div--popup_modal_uredi h2 {
+  margin-top: 0;
+}
+
+.div--closeModal_uredi {
+  max-width: 90%;
+  display: flex;
+  justify-content: right;
+}
+
+.span--x_uredi {
+  font-size: 30px;
+  cursor: pointer;
+  font-family: "Kanit", sans-serif;
+}
+
+.input--ime_pacijenta_uredi {
+  display: flex;
+  margin: 10px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  text-align: center;
+  width: 87%;
+  font-family: "Libre Baskerville", serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.input--prezime_pacijenta_uredi {
+  margin: 10px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  text-align: center;
+  width: 87%;
+  font-family: "Libre Baskerville", serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.input--jmbg_uredi {
+  margin: 10px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  text-align: center;
+  width: 87%;
+  font-family: "Libre Baskerville", serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.div--buttons_uredi {
+  display: flex;
+  margin-top: 10px;
+  width: 80%;
+  justify-content: space-around;
+}
+
+.button--uredi {
+  margin: 10px;
+  height: 31px;
+  width: 120px;
+  border-radius: 10px;
+  border: none;
+  font-family: "Libre Baskerville", serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button--uredi:hover {
+  background-color: rgba(156, 166, 172, 1);
+}
+
+.button--otkazi_uredi {
+  margin: 10px;
+  height: 31px;
+  width: 120px;
+  border-radius: 10px;
+  border: none;
+  font-family: "Libre Baskerville", serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button--otkazi_uredi:hover {
+  background-color: rgba(156, 166, 172, 1);
+}
+
+.button--uredi {
+  margin: 10px;
+  height: 31px;
+  width: 120px;
+  border-radius: 10px;
+  border: none;
+  font-family: "Libre Baskerville", serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.button--uredi:hover {
+  background-color: rgba(156, 166, 172, 1);
+}
+
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.select--select_button_uredi {
+  margin: 10px;
+  height: 30px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  text-align: center;
+  width: 89%;
+  font-family: "Libre Baskerville", serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.option--option_button_uredi {
+  display: flex;
+  flex-direction: column;
+  font-family: "Libre Baskerville", serif;
+}
+
+.select--select_button option {
+  text-align: center;
+}
+
+@media screen and (max-width: 1275px) {
+  .div--popup_modal_uredi h2 {
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    text-align: center;
+  }
+}

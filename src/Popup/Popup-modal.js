@@ -53,28 +53,66 @@ const Modal = (props) => {
       jmbgRef.current.value.trim().length <= 12
     ) {
       return alert("Unesite tacno 13 cifara");
-    } else {
-      const url = `http://172.18.1.73:8080/api3.cfc?method=pacijent_unos&ime=${
-        imeRef.current.value
-      }&prezime=${prezimeRef.current.value}&jmbg=${
-        jmbgRef.current.value
-      }&id_grad=${+data.grad}`;
+    } else if (jmbgRef.current.value.trim().length === 13) {
+      const maticniBroj = jmbgRef.current.value.trim();
 
-      axios
-        .post(url, {
-          firstName: imeRef.current.value,
-          lastName: prezimeRef.current.value,
-          jmbg: jmbgRef.current.value,
-          grad: +data.grad,
-        })
-        .then((res) => {
-          console.log(res.data);
-          alert("Uspjesno ste unijeli pacijenta!");
-          imeRef.current.value = "";
-          prezimeRef.current.value = "";
-          jmbgRef.current.value = "";
-          props.onClose(false);
-        });
+      let a1 = maticniBroj[0];
+      let a2 = maticniBroj[1];
+      let a3 = maticniBroj[2];
+      let a4 = maticniBroj[3];
+      let a5 = maticniBroj[4];
+      let a6 = maticniBroj[5];
+      let a7 = maticniBroj[6];
+      let a8 = maticniBroj[7];
+      let a9 = maticniBroj[8];
+      let a10 = maticniBroj[9];
+      let a11 = maticniBroj[10];
+      let a12 = maticniBroj[11];
+      let k = maticniBroj[12];
+
+      const sumaBrojeva =
+        7 * a1 +
+        6 * a2 +
+        5 * a3 +
+        4 * a4 +
+        3 * a5 +
+        2 * a6 +
+        7 * a7 +
+        6 * a8 +
+        5 * a9 +
+        4 * a10 +
+        3 * a11 +
+        2 * a12;
+
+      const m = sumaBrojeva % 11;
+      const o = 11 - m;
+
+      if (o == k) {
+        alert("Ispravan maticni broj!");
+        const url = `http://172.18.1.73:8080/api3.cfc?method=pacijent_unos&ime=${
+          imeRef.current.value
+        }&prezime=${prezimeRef.current.value}&jmbg=${
+          jmbgRef.current.value
+        }&id_grad=${+data.grad}`;
+
+        axios
+          .post(url, {
+            firstName: imeRef.current.value,
+            lastName: prezimeRef.current.value,
+            jmbg: jmbgRef.current.value,
+            grad: +data.grad,
+          })
+          .then((res) => {
+            console.log(res.data);
+            alert("Uspjesno ste unijeli pacijenta!");
+            imeRef.current.value = "";
+            prezimeRef.current.value = "";
+            jmbgRef.current.value = "";
+            props.onClose(false);
+          });
+      } else {
+        return alert("Neispravan maticni broj!");
+      }
     }
   }
 
@@ -113,7 +151,8 @@ const Modal = (props) => {
             ref={jmbgRef}
             type="number"
           ></input>
-          <select onChange={handle} className="select--select_button">
+          <select onChange={handle} className="select--select_button" required>
+            <option>Izaberi grad</option>
             {props.gradovi.map((grad) => {
               return (
                 <option data-id={grad.id_grad} key={grad.id_grad}>

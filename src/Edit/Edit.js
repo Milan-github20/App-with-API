@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
+import "./edit.css";
 
 const Backdrop = () => {
   return <div className="backdrop"></div>;
@@ -100,32 +101,31 @@ const Edit = (props) => {
     setData(newdata);
   }
   return (
-    <div className="div--backgorund_popup">
+    <div className="div--backgorund_popup_uredi">
       <form onSubmit={(e) => submit(e)}>
-        <div className="div--closeModal">
-          <span className="span--x" onClick={() => props.onClose(false)}>
+        <div className="div--closeModal_uredi">
+          <span className="span--x_uredi" onClick={() => props.onClose(false)}>
             ✖
           </span>
         </div>
-        <div className="div--popup_modal">
-          <h2>Dodaj pacijenta</h2>
-          <div className="name">
-            <input
-              className="input--ime_pacijenta_dodaj"
-              type="text"
-              id="firstName"
-              ref={imeRef}
-              defaultValue={
-                props.nestoDrugo.ime.charAt(0).toUpperCase() +
-                props.nestoDrugo.ime.slice(1).toLowerCase()
-              }
-            />
-          </div>
+        <div className="div--popup_modal_uredi">
+          <h2>Uredi pacijenta</h2>
+
+          <input
+            className="input--ime_pacijenta_uredi"
+            type="text"
+            id="firstName"
+            ref={imeRef}
+            defaultValue={
+              props.nestoDrugo.ime.charAt(0).toUpperCase() +
+              props.nestoDrugo.ime.slice(1).toLowerCase()
+            }
+          />
 
           <input
             type="text"
             id="lastName"
-            className="input--prezime_pacijenta_dodaj"
+            className="input--prezime_pacijenta_uredi"
             ref={prezimeRef}
             defaultValue={
               props.nestoDrugo.prezime.charAt(0).toUpperCase() +
@@ -135,22 +135,23 @@ const Edit = (props) => {
 
           <input
             type="number"
-            className="input--jmbg_dodaj"
+            className="input--jmbg_uredi"
             id="jmbg"
             ref={jmbgRef}
             defaultValue={props.nestoDrugo.jmbg}
           />
 
-          <select className="select--select_button" onChange={handle}>
+          <select className="select--select_button_uredi" onChange={handle}>
+            <option>Izaberi grad</option>
             {items.map((item) => (
               <option data-id={item.id_grad}>{item.naziv}</option>
             ))}
           </select>
-          <div className="div--buttons">
-            <input type="submit" className="button--dodaj" value="Uredi" />
+          <div className="div--buttons_uredi">
+            <input type="submit" className="button--uredi" value="Uredi" />
             <input
               type="button"
-              className="button--otkazi"
+              className="button--otkazi_uredi"
               onClick={() => props.onClose(false)}
               value="Otkaži"
             />

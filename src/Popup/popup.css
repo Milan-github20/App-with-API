@@ -29,7 +29,7 @@
 }
 
 .div--closeModal {
-  max-width: 25rem;
+  max-width: 90%;
   display: flex;
   justify-content: right;
 }
@@ -41,13 +41,14 @@
 }
 
 .input--ime_pacijenta_dodaj {
+  display: flex;
   margin: 10px;
   height: 30px;
   border-radius: 10px;
   border: none;
   outline: none;
   text-align: center;
-  width: 20rem;
+  width: 87%;
   font-family: "Libre Baskerville", serif;
   font-size: 14px;
   font-weight: 700;
@@ -60,7 +61,7 @@
   border: none;
   outline: none;
   text-align: center;
-  width: 20rem;
+  width: 87%;
   font-family: "Libre Baskerville", serif;
   font-size: 14px;
   font-weight: 700;
@@ -73,7 +74,7 @@
   border: none;
   outline: none;
   text-align: center;
-  width: 20rem;
+  width: 87%;
   font-family: "Libre Baskerville", serif;
   font-size: 14px;
   font-weight: 700;
@@ -82,6 +83,8 @@
 .div--buttons {
   display: flex;
   margin-top: 10px;
+  width: 80%;
+  justify-content: space-around;
 }
 
 .button--dodaj {
@@ -133,7 +136,8 @@
 
 .backdrop {
   background-color: rgba(0, 0, 0, 0.3);
-  position: absolute;
+  position: fixed;
+  overflow-x: hidden;
   top: 0;
   left: 0;
   height: 100vh;
@@ -148,7 +152,7 @@
   border: none;
   outline: none;
   text-align: center;
-  width: 20rem;
+  width: 89%;
   font-family: "Libre Baskerville", serif;
   font-size: 14px;
   font-weight: 700;
@@ -158,4 +162,17 @@
   display: flex;
   flex-direction: column;
   font-family: "Libre Baskerville", serif;
+}
+
+.select--select_button option {
+  text-align: center;
+}
+
+@media screen and (max-width: 1275px) {
+  .div--popup_modal h2 {
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    text-align: center;
+  }
 }

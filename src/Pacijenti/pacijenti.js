@@ -24,15 +24,19 @@ function Pacijenti(props) {
 
   function deleteItem(id, e) {
     e.preventDefault();
-    e.target.parentElement.parentElement.remove();
-    console.log(id);
-    axios
-      .post(`http://172.18.1.73:8080/api3.cfc?method=pacijent_obrisi&id=${id}`)
-      .then((res) => {
-        console.log(res.data);
-        alert("Pacijent je obrisan!");
-        console.log(props.pacijenti);
-      });
+    if (window.confirm("Da li ste sigurni da zelite obrisati pacijenta?")) {
+      e.target.parentElement.parentElement.remove();
+      console.log(id);
+      axios
+        .post(
+          `http://172.18.1.73:8080/api3.cfc?method=pacijent_obrisi&id=${id}`
+        )
+        .then((res) => {
+          console.log(res.data);
+          alert("Pacijent je obrisan!");
+          console.log(props.pacijenti);
+        });
+    }
   }
   return (
     <>

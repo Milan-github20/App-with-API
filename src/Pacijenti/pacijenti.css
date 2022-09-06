@@ -70,3 +70,55 @@
 .th--button_2:hover {
   background-color: #9f3c3c;
 }
+
+@media screen and (max-width: 730px) {
+  .tr--header_tr {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    font-size: 14px;
+  }
+
+  .tr--main_dio_tabele {
+    display: flex;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .tr--header_tr {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    font-size: 10px;
+  }
+
+  .tr--main_dio_tabele {
+    display: flex;
+    font-size: 10px;
+  }
+
+  .th--button_1 {
+    background-color: #ffd700;
+    border: 0;
+    border-radius: 5px;
+    font-family: "Libre Baskerville", serif;
+    height: 18px;
+    margin: 3px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 10px;
+  }
+
+  .th--button_2 {
+    background-color: #f44336;
+    border: 0;
+    border-radius: 5px;
+    font-family: "Libre Baskerville", serif;
+    height: 18px;
+    font-weight: 700;
+    margin: 3px;
+    cursor: pointer;
+    font-size: 10px;
+  }
+}

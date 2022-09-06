@@ -107,24 +107,28 @@ const Main = () => {
             className="input--pretrazi_pacijenta"
             onChange={(e) => setValue(e.target.value)}
           ></input>
-          <button className="button--listing_pacijenata">Trazi</button>
         </form>
-        <button
-          className="button--dodaj_pacijenta"
-          onClick={() => {
-            setOpenModal(true);
-          }}
-        >
-          Dodaj pacijenta
-        </button>
-        <button
-          className="button--dodaj_grad_main"
-          onClick={() => {
-            setOpenModalGrad(true);
-          }}
-        >
-          Dodaj Grad
-        </button>
+        <div className="div--buttoni">
+          <form onSubmit={searchSum}>
+            <button className="button--listing_pacijenata">Trazi</button>
+          </form>
+          <button
+            className="button--dodaj_pacijenta"
+            onClick={() => {
+              setOpenModal(true);
+            }}
+          >
+            Dodaj pacijenta
+          </button>
+          <button
+            className="button--dodaj_grad_main"
+            onClick={() => {
+              setOpenModalGrad(true);
+            }}
+          >
+            Dodaj Grad
+          </button>
+        </div>
       </div>
       <div className="div--popup">
         {openModal && <Popup gradovi={items} closeModal={setOpenModal} />}

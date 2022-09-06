@@ -43,7 +43,7 @@
   border: none;
   outline: none;
   text-align: center;
-  width: 20rem;
+  width: 87%;
   font-family: "Libre Baskerville", serif;
   font-size: 14px;
   font-weight: 700;
@@ -52,6 +52,8 @@
 .div--buttons_grad {
   display: flex;
   margin-top: 10px;
+  width: 80%;
+  justify-content: space-around;
 }
 
 .button--dodaj_grad {
@@ -84,4 +86,13 @@
 
 .button--otkazi_grad:hover {
   background-color: rgba(156, 166, 172, 1);
+}
+
+@media screen and (max-width: 1275px) {
+  .div--popup_modal_grad h2 {
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    text-align: center;
+  }
 }
