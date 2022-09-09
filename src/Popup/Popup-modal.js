@@ -152,13 +152,10 @@ const Modal = (props) => {
             type="number"
           ></input>
           <select onChange={handle} className="select--select_button" required>
+            <option>Izaberi grad</option>
             {props.gradovi.map((grad) => {
               return (
-                <option
-                  data-id={grad.id_grad}
-                  defaultValue={grad.naziv}
-                  key={grad.id_grad}
-                >
+                <option data-id={grad.id_grad} key={grad.id_grad}>
                   {grad.naziv}
                 </option>
               );
