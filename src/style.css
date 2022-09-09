@@ -4,12 +4,13 @@ body {
   margin: 0;
   background-color: rgba(178, 201, 215, 1);
   font-family: "Libre Baskerville", serif;
+  overflow: hidden;
 }
 
 .div--pocetni_input {
   display: flex;
   justify-content: center;
-  margin-top: 8rem;
+  margin-top: 6rem;
 }
 
 .div--buttoni {

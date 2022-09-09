@@ -5,6 +5,28 @@
   flex-direction: column;
 }
 
+.tabela--tabela_pacijenti tbody {
+  overflow-y: scroll;
+  height: 700px;
+}
+
+.tabela--tabela_pacijenti tbody::-webkit-scrollbar {
+  width: 20px;
+}
+
+.tabela--tabela_pacijenti tbody::-webkit-scrollbar-track {
+  background-color: rgba(178, 201, 215, 1);
+}
+
+.tabela--tabela_pacijenti tbody::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 166, 172, 1);
+  border-radius: 5px;
+}
+
+.grad--- {
+  margin-right: 15px;
+}
+
 .tr--header_tr {
   display: flex;
   justify-content: space-evenly;
