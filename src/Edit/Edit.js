@@ -11,12 +11,14 @@ const Edit = (props) => {
   const imeRef = useRef();
   const prezimeRef = useRef();
   const jmbgRef = useRef();
+  const gradRef = useRef();
 
   const [data, setData] = useState({
     grad: "",
   });
 
   const [items, setItems] = useState([]);
+  console.log(items);
 
   const fetchGradovi = async () => {
     const response = await fetch(
@@ -78,7 +80,9 @@ const Edit = (props) => {
       imeRef.current.value
     }&prezime=${prezimeRef.current.value}&jmbg=${
       jmbgRef.current.value
-    }&id_grad=${+data.grad}&id=${props.nestoDrugo.id}`;
+    }&id_grad=${data.grad ? +data.grad : gradRef.current.dataset.id}&id=${
+      props.nestoDrugo.id
+    }`;
 
     axios
       .post(url, {
@@ -93,7 +97,7 @@ const Edit = (props) => {
       });
   }
 
-  console.log(data.grad);
+  console.log(props.nestoDrugo.id_grad);
 
   function handle(e) {
     const index = e.target.children[e.target.selectedIndex].dataset.id;
@@ -143,9 +147,13 @@ const Edit = (props) => {
           />
 
           <select className="select--select_button_uredi" onChange={handle}>
-            <option>Izaberi grad</option>
+            <option data-id={props.nestoDrugo.id_grad} ref={gradRef}>
+              {props.nestoDrugo.grad}
+            </option>
             {items.map((item) => (
-              <option data-id={item.id_grad}>{item.naziv}</option>
+              <option data-id={item.id_grad} ref={data}>
+                {item.naziv}
+              </option>
             ))}
           </select>
           <div className="div--buttons_uredi">

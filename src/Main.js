@@ -84,6 +84,7 @@ const Main = () => {
                   ime: item[2],
                   jmbg: item[3],
                   grad: helper !== -1 ? items[helper].naziv : "",
+                  grad_id: item[4],
                 };
               }
             );
@@ -113,6 +114,7 @@ const Main = () => {
                 ime: item[2],
                 jmbg: item[3],
                 grad: helper !== -1 ? items[helper].naziv : "",
+                grad_id: item[4],
               };
             }
           );

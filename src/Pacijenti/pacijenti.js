@@ -9,13 +9,14 @@ function Pacijenti(props) {
   const [isEditing, setIsEditing] = useState(false);
   const [uredi, setUredi] = useState(false);
 
-  const editPacijenta = (id, ime, prezime, jmbg, grad) => {
+  const editPacijenta = (id, ime, prezime, jmbg, grad, id_grad) => {
     const data = {
       id: id,
       ime: ime,
       prezime: prezime,
       jmbg: jmbg,
       grad: grad,
+      id_grad: id_grad,
     };
 
     setEdit(data);
@@ -35,6 +36,7 @@ function Pacijenti(props) {
         });
     }
   }
+
   return (
     <>
       <table className="tabela--tabela_pacijenti">
@@ -73,7 +75,8 @@ function Pacijenti(props) {
                         item.ime,
                         item.prezime,
                         item.jmbg,
-                        item.grad
+                        item.grad,
+                        item.grad_id
                       );
                       setUredi(true);
                     }}
