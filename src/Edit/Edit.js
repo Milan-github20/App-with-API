@@ -39,6 +39,7 @@ const Edit = (props) => {
 
   function submit(e) {
     e.preventDefault();
+    props.getJmbg(jmbgRef.current.value);
     if (
       imeRef.current.value.trim() === "" ||
       imeRef.current.value.trim() === null
@@ -170,7 +171,11 @@ const PopupEdit = (props) => {
         document.getElementById("modal")
       )}
       {ReactDOM.createPortal(
-        <Edit nestoDrugo={props.podaci} onClose={props.uredi}></Edit>,
+        <Edit
+          getJmbg={props.getJmbg}
+          nestoDrugo={props.podaci}
+          onClose={props.uredi}
+        ></Edit>,
         document.getElementById("modal")
       )}
     </>

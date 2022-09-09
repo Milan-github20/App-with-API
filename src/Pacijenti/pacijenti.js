@@ -91,7 +91,9 @@ function Pacijenti(props) {
             </tr>
           ))}
         </tbody>
-        {uredi && isEditing && <PopupEdit podaci={edit} uredi={setUredi} />}
+        {uredi && isEditing && (
+          <PopupEdit getJmbg={props.getJmbg} podaci={edit} uredi={setUredi} />
+        )}
       </table>
     </>
   );

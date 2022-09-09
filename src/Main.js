@@ -13,7 +13,6 @@ const Main = () => {
   const [ucitavanje, setUcitavanje] = useState(false);
   const [pacijenti, setPacijenti] = useState([]);
   const [items, setItems] = useState([]);
-
   const fetchGradovi = async () => {
     const response = await fetch(
       "http://172.18.1.73:8080/api3.cfc?method=gradovi_lista"
@@ -32,6 +31,33 @@ const Main = () => {
   useEffect(() => {
     fetchGradovi();
   }, []);
+
+  const getJmbg = (jmbg) => {
+    return setTimeout(() => {
+      axios
+        .get(
+          `http://172.18.1.73:8080/api3.cfc?method=pacijent_trazi&jmbg=${jmbg}`
+        )
+        .then((response) => {
+          const transformedData = response.data.lista_pacijenata.DATA.map(
+            (item) => {
+              let helper = items.findIndex((grad) => grad.id_grad === item[4]);
+              return {
+                id: item[0],
+                prezime: item[1],
+                ime: item[2],
+                jmbg: item[3],
+                grad: helper !== -1 ? items[helper].naziv : "",
+              };
+            }
+          );
+          setPacijenti(transformedData);
+
+          setUcitavanje(true);
+        })
+        .catch((err) => console.log(err));
+    }, 1000);
+  };
 
   const searchSum = (e) => {
     e.preventDefault();
@@ -131,12 +157,14 @@ const Main = () => {
         </div>
       </div>
       <div className="div--popup">
-        {openModal && <Popup gradovi={items} closeModal={setOpenModal} />}
+        {openModal && (
+          <Popup getJmbg={getJmbg} gradovi={items} closeModal={setOpenModal} />
+        )}
       </div>
       <div className="div--popup">
         {openModalGrad && <PopupGradovi closeModalGrad={setOpenModalGrad} />}
       </div>
-      {ucitavanje && <Pacijenti pacijenti={pacijenti} />}
+      {ucitavanje && <Pacijenti getJmbg={getJmbg} pacijenti={pacijenti} />}
     </div>
   );
 };

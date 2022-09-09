@@ -37,6 +37,7 @@ const Modal = (props) => {
           console.log(res.dataGrad);
           alert("Uspjesno ste unijeli grad!");
           gradRef.current.value = "";
+          window.location.reload(false);
           props.onClose(false);
         });
     }

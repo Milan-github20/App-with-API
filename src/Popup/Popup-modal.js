@@ -22,7 +22,7 @@ const Modal = (props) => {
 
   function submit(e) {
     e.preventDefault();
-
+    props.getJmbg(jmbgRef.current.value);
     if (
       imeRef.current.value.trim() === "" ||
       imeRef.current.value.trim() === null
@@ -187,7 +187,11 @@ const Popup = (props) => {
         document.getElementById("modal")
       )}
       {ReactDOM.createPortal(
-        <Modal gradovi={props.gradovi} onClose={props.closeModal}></Modal>,
+        <Modal
+          gradovi={props.gradovi}
+          getJmbg={props.getJmbg}
+          onClose={props.closeModal}
+        ></Modal>,
         document.getElementById("modal")
       )}
     </>
